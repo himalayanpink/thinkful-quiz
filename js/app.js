@@ -19,24 +19,63 @@ $(document).ready(function(){
 			},
 
 			{	
-				question:'TextyTest',
+				question:'Who of the following is not listed amongst the "nine old men"?',
 				choices:
 					[
-					'test', 
-					'test1',
-					'test2',
-					'test3',
+					'Frank Thomas', 
+					'Marc Davis',
+					'Les Clark',
+					'Al Bertino',
 					],
-				answer:'test',
-				wrongChoiceResponse: 'Not Good.',
-				rightChoiceResponse: 'Good.',
+				answer:'Al Bertino',
+				wrongChoiceResponse: "That's an Old Man.",
+				rightChoiceResponse: 'Al Bertino was active after the Golden Age.',
 			},
+			
+			{	
+				question:'Which two movies featured prominent cameos from two of the group?',
+				choices:
+					['Ratatouille/Bolt', 
+					'Lilo & Stitch/Toy Story 2',
+					'The Iron Giant/The Incredibles',
+					'The Rescuers Down Under/Aladdin',
+					],
+				answer:'The Iron Giant/The Incredibles',
+				wrongChoiceResponse: 'No, no old men cameos in those flicks.',
+				rightChoiceResponse: 'Turns out Brad Bird is a fan.',
+			},
+
+		// 	{	
+		// 		question:'Which character was animated by Ollie Johnston?',
+		// 		choices:
+		// 			['Mr. Smee from "Peter Pan"', 
+		// 			'Gus from "Cinderella"',
+		// 			'Lady from "Lady and the Tramp',
+		// 			'Merlin from "The Sword in the Stone',
+		// 			],
+		// 		answer:'Mr. Smee from "Peter Pan"',
+		// 		wrongChoiceResponse: "I'm honestly impressed you know that.",
+		// 		rightChoiceResponse: "Eh, I'd have to pick randomly too.",
+		// 	},
+
+		// 	{	
+		// 		question:'Which prominent golden age animator is not considered part of the group?',
+		// 		choices:
+		// 			[
+		// 			'Milt Kahl', 
+		// 			'Bill Tytla',
+		// 			'Ward Kimball',
+		// 			'John Lounsbery',
+		// 			],
+		// 		answer:'Bill Tytla',
+		// 		wrongChoiceResponse: "Hint: He's famous for Dumbo.",
+		// 		rightChoiceResponse: 'Though one must wonder why...',
+		// 	},
 		
 		];
 
 
-
-	// ------ CALL-FROM-ARRAY SHORTCUTS ----- //
+	// ------ FUNCTIONS & CALL-FROM-ARRAY SHORTCUTS ----- //
 
 	var currentQuestion = 0;
 
@@ -46,11 +85,16 @@ $(document).ready(function(){
 	var quizWrongChoiceClick = quiz[currentQuestion].wrongChoiceResponse;
 	var quizRightChoiceClick = quiz[currentQuestion].rightChoiceResponse;
 
-	var isAnswer = false;
+	var isAnswerScreen = false;
+	var isCorrectAnswer = false;
+
+	var responseText;
+	var correctOrNope;
+
+	var score = 0;
 
 
-
-	// ------ RANDOMIZE CHOICE OUTPUT/ORDER ----- //
+	// ------ RANDOMIZE CHOICE OUTPUT & ORDER ----- //
 
 	function shuffle(array) {
 
@@ -80,7 +124,7 @@ $(document).ready(function(){
 
 	function populateQuizBase() {
 
-		$("h3.question").html(quizQuestion);
+		$("h3.question").html('Q: ' + quizQuestion);
 		$("#choices")
 			.empty();
 		for (var i = 0; i < quizChoices.length; i++) {
@@ -91,9 +135,6 @@ $(document).ready(function(){
 
 	function populateQuiz() {
 
-		$("h3.q").show();
-		$("h3.question").show();
-		
 		if(currentQuestion == 0) {
 			populateQuizBase();
 		}
@@ -101,8 +142,8 @@ $(document).ready(function(){
 			quizQuestion = quiz[currentQuestion].question;
 			quizChoices = quiz[currentQuestion].choices;
 			quizAnswer = quiz[currentQuestion].answer;
-			quizWrongChoiceClick = quiz[currentQuestion].wrongChoiceResponse;
-			quizRightChoiceClick = quiz[currentQuestion].rightChoiceResponse;
+			// quizWrongChoiceClick = quiz[currentQuestion].wrongChoiceResponse;
+			// quizRightChoiceClick = quiz[currentQuestion].rightChoiceResponse;
 			shuffle(quizChoices);
 			populateQuizBase();
 		}
@@ -110,106 +151,133 @@ $(document).ready(function(){
 	};
 
 
-	function runQuiz() {
-		// if (isAnswer = true) {
-			$("a.arrowRight")
-				.on("click", function() {
-
-				   	$("h3.response").hide();
-					$("h3.correctAnswerCounter").hide();
-					$(".fa.fa-angle-right").hide();
-					
-					currentQuestion++;
-					// populateQuiz();
-			
-
-					runQuizBase();
-
-				});	
-		// }
-		
-		// else {
-		// 	runQuizBase();
-		// }
-	};
-
-
-
-	// ------ Checks If Answer is Correct and Displays Score----- //
+	// ------ Checks If Answer is Correct ----- //
 
 	function checkAnswer(clickedChoice) {
 
-		$("a.arrowRight").click(function() {
+		if(quizAnswer == clickedChoice) {
+   			isCorrectAnswer = true;
 
-			$("h3.q").hide();
-			$("h3.question").hide();
-			$("#choices").empty();
-			$("h3.response").show();
-			$("h3.correctAnswerCounter").show();
-
-			if(quizAnswer == clickedChoice) {
-       			console.log("Correct");
-       			$("h3.response").html('<p>CORRECT!</p>');
-       			// $("#questionBox").append('<p>' + quizRightChoiceClick + '</p>' );
-    		} 
+   			correctOrNope = "CORRECT!"
+   			// responseText = quizRightChoiceClick;
+   			responseText = quiz[currentQuestion].rightChoiceResponse;
+    	} 
     
-	        else {
-	           	console.log("Nope!");
-	           	$("h3.response").html('<p>NOPE!</p>');
-	           	// $("#questionBox").append('<p>' + quizWrongChoiceClick + '</p>' );
-	        }
+        else {
+           	isCorrectAnswer = false;
 
-			// isAnswer = true;
-			console.log("Is Answer");
-
-
-			runQuiz();
-
-		})
+           	correctOrNope = "NOPE!"
+         	// responseText = quizWrongChoiceClick;
+         	responseText = quiz[currentQuestion].wrongChoiceResponse;
+        }
+	
 	};
 
 
+	// ------ "Alternates" Questions and Answers ----- //
 
-	function runQuizBase() {
-		
+	function showNextScreen(){
 
-		populateQuiz();
+		if (isAnswerScreen && currentQuestion == quiz.length-1){
+			endQuiz();
+		}
 		
-		console.log("Is Question");
+		else if (isAnswerScreen){
+			isAnswerScreen = false;
+
+			$("h3.question").show();
+			$("#choices").show();
 			
-		$("#questionBox")
+			$("h3.correctOrNope").hide();
+			$("h3.correctAnswerCounter").hide();
+			$("p.response").hide();
+			
+			$(".fa.fa-angle-right").hide();
+			$(".arrowClickArea").hide();
 
-			.on("click", "input", function() {
-				var clickedChoice = $("input:checked").next('label').text();
-				console.log(clickedChoice)
-			    
+			
+			currentQuestion++;
+			populateQuiz();
+		}	
+	
+		else{
+			isAnswerScreen = true;
 
-				// ------ Shows "Next" Arrow ----- //
+			$("h3.question").hide();
+			$("#choices").hide();
 
-				$(".fa.fa-angle-right")
-					.hide()
-					.fadeOut(100)
-					.fadeIn(100)
-					.show()
-					.css("display", "inline-block")
-				;
-	 
-				$("a.arrowRight").css("cursor", "pointer");
+			$("h3.correctOrNope").show();
+			$("h3.correctAnswerCounter").show();	
+			$("p.response").show();
 
-				// ------ END----- //
+			if(isCorrectAnswer){
+				score ++;
+			}
+			else{
+				score;
+			}
 
-				checkAnswer(clickedChoice)	
-		
-		
-			});
+			$("h3.correctOrNope").html(correctOrNope);
+
+			$("h3.correctAnswerCounter").html('<h3>' + score + '/' + quiz.length + '</h3?>');
+			$("p.response").html(responseText);
+		}
 
 	};
 
+	$(".arrowClickArea")
+
+		.on("click", function() {
+	   		showNextScreen();
+		});	
+
+
+	// ------ End Quiz State ----- //
+	
+	function endQuiz() {
+		$("h3.question").hide();
+		$("#choices").hide();
+		
+		$("h3.correctOrNope").show().html("FINAL SCORE");
+		$("h3.correctAnswerCounter").show();
+		$("p.response").hide();
+
+		
+		$(".fa.fa-angle-right").hide();
+		$(".arrowClickArea").hide();
+	}
 
 
 
-	runQuizBase();
-	// runQuiz();
+	// ------ Reads User Selection and Shows "Next" Arrow ----- //
+
+	$("#questionBox")
+
+		.on("click", "input", function() {
+			var clickedChoice = $("input:checked").next('label').text();
+			console.log(clickedChoice)
+
+			// ------ Shows "Next" Arrow ----- //
+
+			$(".fa.fa-angle-right")
+				.hide()
+				.fadeOut(100)
+				.fadeIn(100)
+				.show()
+				.css("display", "inline-block")
+			;
+ 
+			$(".arrowClickArea").show().css("cursor", "pointer");
+
+			// ------ END----- //
+
+			checkAnswer(clickedChoice)	
+
+		});
+	
+
+	populateQuiz();
+
 
 });
 

@@ -38,7 +38,7 @@ body{
 
 /* -- Arrows -- */
 
-.arrowRight, .arrowLeft, #questionBox{
+.arrowRightSpace, .arrowLeftSpace, #questionBox{
     height: 200px;
     display: inline-block;
     vertical-align: middle;
@@ -46,7 +46,7 @@ body{
     margin-top: 60px;
 }
 
-.arrowRight, .arrowLeft{
+.arrowRightSpace, .arrowLeftSpace{
     width: 30px;
 }
 
@@ -54,7 +54,7 @@ a{
     margin: 0 -5px;
 }
 
-a.arrowRight{
+a.arrowRightSpace{
     /*cursor: pointer;*/
     background: #3498db;
     background-image: -webkit-linear-gradient(right,#677077, #edd9c0);
@@ -66,7 +66,7 @@ a.arrowRight{
     border-bottom-right-radius: 1px;
 }
 
-a.arrowLeft{
+a.arrowLeftSpace{
     /*cursor: pointer;*/
     background: #3498db;
     background-image: -webkit-linear-gradient(left,#677077, #edd9c0);
@@ -77,27 +77,6 @@ a.arrowLeft{
     border-top-left-radius: 1px;
     border-bottom-left-radius: 1px;
 }
-
-/*a.arrowRight:hover{
-    cursor: pointer;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(right,#677077, #edd9c0);
-    background-image: -moz-linear-gradient(right, #677077, #edd9c0);
-    background-image: -ms-linear-gradient(right, #677077,  #edd9c0);
-    background-image: -o-linear-gradient(right, #677077,  #edd9c0);
-    background-image: linear-gradient(to left, #677077,  #edd9c0);
-}
-
-a.arrowLeft:hover{
-    cursor: pointer;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(left,#677077, #edd9c0);
-    background-image: -moz-linear-gradient(left, #677077, #edd9c0);
-    background-image: -ms-linear-gradient(left, #677077, #edd9c0);
-    background-image: -o-linear-gradient(left, #677077, #edd9c0);
-    background-image: linear-gradient(to right, #677077, #edd9c0);
-
-}*/
 
 .fa.fa-angle-right, .fa.fa-angle-left{
     margin-top: 86px;
@@ -111,11 +90,16 @@ a.arrowLeft:hover{
     /*color: white;*/
 }
 
-#arrowRight{
+#arrowRightSpace{
     width: 40px;
 }
 
-#arrowLeft{
+.arrowClickArea{
+    height: 200px;
+    display: none;
+}
+
+#arrowLeftSpace{
     width: 40px;
 }
 /* -------- */
@@ -189,26 +173,33 @@ a.arrowLeft:hover{
 
      /* -------- *//* -- Answer Area -- *//* -------- */
 
-#questionBox .response, #questionBox .correctAnswerCounter {
+#questionBox .response, #questionBox .correctAnswerCounter, #quesetionBox .correct {
     display: none;
 }
 
 #questionBox .response {
-    margin-top: 40px;
-/*    display: none;*/
+/*    margin-top: 40px;*/
+    text-transform: none;
+    margin-top: -3px;
 }
+
+#questionBox .correctAnswerCounter{
+    margin-top: -9px;
+    font-size: 34px;
+}
+
 
 
 /* -- Main Quiz Area -- */
 
-@media only screen and (max-width: 560px){
+@media only screen and (max-width: 800px){
     
     #questionBox{
         width: 85%;
-        padding: 0;
+        padding: 55px;
     }
 
-    #questionBox, .arrowRight, .arrowLeft{
+    #questionBox, .arrowRightSpace, .arrowLeftSpace, .arrowClickArea{
         height: 330px;
     }
 
@@ -226,10 +217,6 @@ a.arrowLeft:hover{
     }
 
 }
-
-
-
-
 
 #bottomBox{
     bottom: 0;
