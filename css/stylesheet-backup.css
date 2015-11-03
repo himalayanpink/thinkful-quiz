@@ -1,0 +1,227 @@
+*{
+	text-align: center;
+	color: #7d4627;
+}
+
+body{
+	background-color: #677077;
+    height: 100%;
+}
+
+
+/* -- Quiz Title -- */
+
+#title h1, #title h2{
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+}
+
+#title h2{
+	background-color: #a8b6bf;
+	margin-top: 55px;
+}
+
+#title h1{
+	background-color: #c9d8c5;
+	color: white;
+	font-size: 48px;
+	border-width: 20px;
+	border-top-style: solid;
+	border-bottom-style: solid; 
+	border-color: #bd802a;
+	margin: 0;
+	margin-bottom: 40px;
+}
+/* -------- */
+
+
+
+/* -- Arrows -- */
+
+.arrowRightSpace, .arrowLeftSpace, #questionBox{
+    height: 200px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #edd9c0;
+    margin-top: 60px;
+}
+
+.arrowRightSpace, .arrowLeftSpace{
+    width: 30px;
+}
+
+a{
+    margin: 0 -5px;
+}
+
+a.arrowRightSpace{
+    /*cursor: pointer;*/
+    background: #3498db;
+    background-image: -webkit-linear-gradient(right,#677077, #edd9c0);
+    background-image: -moz-linear-gradient(right, #677077, #edd9c0);
+    background-image: -ms-linear-gradient(right, #677077,  #edd9c0);
+    background-image: -o-linear-gradient(right, #677077,  #edd9c0);
+    background-image: linear-gradient(to left, #677077,  #edd9c0);
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+}
+
+a.arrowLeftSpace{
+    /*cursor: pointer;*/
+    background: #3498db;
+    background-image: -webkit-linear-gradient(left,#677077, #edd9c0);
+    background-image: -moz-linear-gradient(left, #677077, #edd9c0);
+    background-image: -ms-linear-gradient(left, #677077, #edd9c0);
+    background-image: -o-linear-gradient(left, #677077, #edd9c0);
+    background-image: linear-gradient(to right, #677077, #edd9c0);
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+}
+
+.fa.fa-angle-right, .fa.fa-angle-left{
+    margin-top: 86px;
+    font-size: 28px;
+    transform:scale(0.9,2); /* W3C */
+    -webkit-transform:scale(0.9,2); /* Safari and Chrome */
+    -moz-transform:scale(0.9,2); /* Firefox */
+    -ms-transform:scale(0.9,2); /* IE 9 */
+    -o-transform:scale(0.9,2); /* Opera */
+    display: none;
+    /*color: white;*/
+}
+
+#arrowRightSpace{
+    width: 40px;
+}
+
+.arrowClickArea{
+    height: 200px;
+    display: none;
+}
+
+#arrowLeftSpace{
+    width: 40px;
+}
+/* -------- */
+
+
+/* -- Main Quiz Area -- */
+
+#questionBox{
+    /*width: 600px;*/
+    width: 90%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-transform: capitalize;
+}
+
+#questionBox form{
+    width: 85%;
+    margin: auto;
+    max-width: 85%;
+}
+    /* -------- *//* -- Question Area -- *//* -------- */
+#questionBox .q, #questionBox .question{
+    display: inline-block;
+}
+
+.answerBar{
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#questionBox input, #questionBox label{
+	vertical-align: middle;
+    /*white-space: nowrap;*/
+    cursor: pointer;
+}
+
+#questionBox label{
+    white-space: nowrap;
+}
+
+#questionBox input[type="radio"]{
+    display:none;
+}
+
+#questionBox input[type="radio"] + label span,
+#questionBox input[type="radio"]:checked + label span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 10px 8px 1px 10px;
+    cursor: pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+#questionBox input[type="radio"] + label span{
+    background-color: white;
+}
+
+#questionBox input[type="radio"]:checked + label span{
+    background-color: #bd802a;
+    height: 6px;
+    width: 6px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+}
+
+     /* -------- *//* -- Answer Area -- *//* -------- */
+
+#questionBox .response, #questionBox .correctAnswerCounter, #quesetionBox .correct {
+    display: none;
+}
+
+#questionBox .response {
+/*    margin-top: 40px;*/
+    text-transform: none;
+    margin-top: -3px;
+}
+
+#questionBox .correctAnswerCounter{
+    margin-top: -9px;
+    font-size: 34px;
+}
+
+
+
+/* -- Main Quiz Area -- */
+
+@media only screen and (max-width: 800px){
+    
+    #questionBox{
+        width: 85%;
+        padding: 55px;
+    }
+
+    #questionBox, .arrowRightSpace, .arrowLeftSpace, .arrowClickArea{
+        height: 330px;
+    }
+
+    #questionBox form{
+        width: 99%;
+        margin: auto;
+    }
+
+    #questionBox input, #questionBox label{
+        white-space: nowrap;
+    }
+
+    .fa.fa-angle-right, .fa.fa-angle-left{
+    margin-top: 140px;
+    }
+
+}
+
+#bottomBox{
+    bottom: 0;
+    height: 45px;
+    width: 100%;
+    background-color: #bd802a;
+    position: absolute;
+}
